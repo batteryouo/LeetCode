@@ -2,10 +2,10 @@
 
 #define NOT_FOUND -1
 
-int num_transfer(int n, int k, int numsSize){
-    int m = k+1;
-    return (n + ( (n<=k)? m: m+numsSize )) % numsSize;
-}
+// int num_transfer(int n, int k, int numsSize){
+//     int m = k+1;
+//     return (n + ( (n<=k)? m: m+numsSize )) % numsSize;
+// }
 
 int search(int* nums, int numsSize, int target) {
 
@@ -41,11 +41,10 @@ int search(int* nums, int numsSize, int target) {
     }
     begin = 0;
     end = numsSize - 1;
-    printf("%d\n", k);
+    
     while(begin <= end){
         mid = (begin + end) / 2;
-        int mid_value = nums[ num_transfer( mid, k, numsSize ) ];
-        printf("%d %d %d\n", begin, mid, end);
+        int mid_value = nums[ (mid+k+1) % numsSize ];
         if(mid_value < target){
             begin = mid + 1;
         }
@@ -53,7 +52,7 @@ int search(int* nums, int numsSize, int target) {
             end = mid - 1;
         }
         else{
-            return num_transfer( mid, k, numsSize );
+            return (mid+k+1) % numsSize;
         }
     }
 
